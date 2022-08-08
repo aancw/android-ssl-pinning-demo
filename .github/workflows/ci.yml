@@ -14,6 +14,9 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
+            
+      - name: Build release
+        run: ./gradlew assembleRelease
 
       - uses: r0adkll/sign-android-release@v1
         name: Sign app APK
