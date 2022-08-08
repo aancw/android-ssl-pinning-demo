@@ -15,13 +15,13 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
 
-      - name: Build release
-        run: ./gradlew assembleRelease
+      - name: Build Signed APK
+        uses: victorbnl/build-signed-apk@v1.0.0
 
       - uses: actions/upload-artifact@v2
         with:
           name: app
-          path: app/build/outputs/apk/release/app-release-unsigned.apk
+          path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
 
   deploy:
@@ -41,6 +41,6 @@ jobs:
         with:
           prerelease: true
           asset_name: pinning-demo.apk
-          file: ${{ steps.get_apk.outputs.download-path }}/app-release-unsigned.apk
+          file: ${{ steps.get_apk.outputs.download-path }}/app-release.apk
           tag: ${{ github.ref }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
