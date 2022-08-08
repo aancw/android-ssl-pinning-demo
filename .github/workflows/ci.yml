@@ -48,7 +48,7 @@ jobs:
         id: get_apk
         uses: actions/download-artifact@v2
         with:
-          name: app
+          name: Signed app bundle
 
       - name: Publish the APK to GitHub Releases
         uses: svenstaro/upload-release-action@v2
