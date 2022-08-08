@@ -28,7 +28,7 @@ import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
 import javax.net.ssl.*
 
-const val DIGICERT_ROOT_SHA256 = "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
+const val ROOT_SHA256 = "w8inyQIV/O8EqPDCXEpt7G3k0N4201/zONsbxcakRrg="
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 val hostname = "petruknisme.com"
                 val certificatePinner = CertificatePinner.Builder()
-                    .add(hostname, "sha256/${DIGICERT_ROOT_SHA256}")
+                    .add(hostname, "sha256/${ROOT_SHA256}")
                     .build()
 
                 val client = OkHttpClient.Builder()
@@ -239,7 +239,7 @@ class MainActivity : AppCompatActivity() {
 
                 val certs = socket.session.peerCertificates
 
-                if (!certs.any { cert -> doesCertMatchPin(DIGICERT_ROOT_SHA256, cert) }) {
+                if (!certs.any { cert -> doesCertMatchPin(ROOT_SHA256, cert) }) {
                     socket.close() // Close the socket immediately without sending a request
                     throw Error("Unrecognized cert hash.")
                 }
