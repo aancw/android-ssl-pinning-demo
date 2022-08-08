@@ -3,7 +3,7 @@
     <domain-config>
         <domain includeSubdomains="false">petruknisme.com</domain>
         <pin-set>
-            <pin digest="SHA-256">w8inyQIV/O8EqPDCXEpt7G3k0N4201/zONsbxcakRrg=</pin>
+            <pin digest="SHA-256">47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=</pin>
         </pin-set>
         <trust-anchors>
             <certificates src="@raw/digicert_ca" />
