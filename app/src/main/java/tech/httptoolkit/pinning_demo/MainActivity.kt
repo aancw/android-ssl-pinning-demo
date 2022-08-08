@@ -28,7 +28,7 @@ import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
 import javax.net.ssl.*
 
-const val DIGICERT_ROOT_SHA256 = "5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w="
+const val DIGICERT_ROOT_SHA256 = "w8inyQIV/O8EqPDCXEpt7G3k0N4201/zONsbxcakRrg="
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             onStart(R.id.config_pinned)
             try {
                 // Pinned by hash in network config:
-                val mURL = URL("https://sha512.badssl.com")
+                val mURL = URL("https://petruknisme.com")
                 with(mURL.openConnection() as HttpsURLConnection) {
                     println("URL: ${this.url}")
                     println("Response Code: ${this.responseCode}")
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             onStart(R.id.okhttp_pinned)
 
             try {
-                val hostname = "sha512.badssl.com"
+                val hostname = "petruknisme.com"
                 val certificatePinner = CertificatePinner.Builder()
                     .add(hostname, "sha256/${DIGICERT_ROOT_SHA256}")
                     .build()
@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                     .certificatePinner(certificatePinner)
                     .build()
                 val request = Request.Builder()
-                    .url("https://sha512.badssl.com")
+                    .url("https://petruknisme.com")
                     .build();
 
                 client.newCall(request).execute().use { response ->
@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity() {
             // Make a request using that client:
             val stringRequest = StringRequest(
                 com.android.volley.Request.Method.GET,
-                "https://sha512.badssl.com",
+                "https://petruknisme.com",
                 { _ ->
                     println("Volley success")
                     this@MainActivity.onSuccess(R.id.volley_pinned)
@@ -201,10 +201,10 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO) {
             onStart(R.id.trustkit_pinned)
             try {
-                val mURL = URL("https://sha512.badssl.com")
+                val mURL = URL("https://petruknisme.com")
                 with(mURL.openConnection() as HttpsURLConnection) {
                     this.sslSocketFactory = TrustKit.getInstance().getSSLSocketFactory(
-                            "sha512.badssl.com"
+                            "petruknisme.com"
                     )
                     println("URL: ${this.url}")
                     println("Response Code: ${this.responseCode}")
@@ -235,7 +235,7 @@ class MainActivity : AppCompatActivity() {
                 val context = SSLContext.getInstance("TLS")
                 context.init(null, trustManager, null)
 
-                val socket = context.socketFactory.createSocket("sha512.badssl.com", 443) as SSLSocket
+                val socket = context.socketFactory.createSocket("petruknisme.com", 443) as SSLSocket
 
                 val certs = socket.session.peerCertificates
 
@@ -247,7 +247,7 @@ class MainActivity : AppCompatActivity() {
                 // Send a real request, just to make it clear that we trust the connection:
                 val pw = PrintWriter(socket.outputStream)
                 pw.println("GET / HTTP/1.1")
-                pw.println("Host: sha512.badssl.com")
+                pw.println("Host: petruknisme.com")
                 pw.println("")
                 pw.flush()
 
