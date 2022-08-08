@@ -55,6 +55,6 @@ jobs:
         with:
           prerelease: true
           asset_name: pinning-signed.apk
-          file: ${{steps.sign_app.outputs.signedReleaseFile}}
+          file: ${{build.steps.sign_app.outputs.signedReleaseFile}}
           tag: ${{ github.ref }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
