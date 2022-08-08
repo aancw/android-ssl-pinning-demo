@@ -55,6 +55,6 @@ jobs:
         with:
           prerelease: true
           asset_name: pinning-signed.apk
-          file: app/build/outputs/apk/release/app-release-unsigned-signed.apk
+          file: ${{ steps.get_apk.outputs.download-path }}/app-release-unsigned-signed.apk
           tag: ${{ github.ref }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
