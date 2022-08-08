@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config>
-        <domain includeSubdomains="false">sha512.badssl.com</domain>
+        <domain includeSubdomains="false">petruknisme.com</domain>
         <pin-set>
-            <pin digest="SHA-256">5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=</pin>
+            <pin digest="SHA-256">w8inyQIV/O8EqPDCXEpt7G3k0N4201/zONsbxcakRrg=</pin>
         </pin-set>
         <trust-anchors>
             <certificates src="@raw/digicert_ca" />
