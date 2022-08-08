@@ -15,13 +15,24 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
 
-      - name: Build Signed APK
-        uses: victorbnl/build-signed-apk@v1.0.0
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK
+        # ID used to access action output
+        id: sign_app
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          # override default build-tools version (29.0.3) -- optional
+          BUILD_TOOLS_VERSION: "30.0.2"
 
       - uses: actions/upload-artifact@v2
         with:
-          name: app
-          path: app/build/outputs/apk/release/app-release.apk
+          name: Signed app bundle
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
           if-no-files-found: error
 
   deploy:
@@ -40,7 +51,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           prerelease: true
-          asset_name: pinning-demo.apk
-          file: ${{ steps.get_apk.outputs.download-path }}/app-release.apk
+          asset_name: pinning-signed.apk
+          file: ${{steps.sign_app.outputs.signedReleaseFile}}
           tag: ${{ github.ref }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
