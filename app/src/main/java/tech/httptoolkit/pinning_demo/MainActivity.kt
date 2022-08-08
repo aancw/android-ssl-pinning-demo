@@ -28,7 +28,7 @@ import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
 import javax.net.ssl.*
 
-const val DIGICERT_ROOT_SHA256 = "w8inyQIV/O8EqPDCXEpt7G3k0N4201/zONsbxcakRrg="
+const val DIGICERT_ROOT_SHA256 = "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
